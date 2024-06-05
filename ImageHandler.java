@@ -24,8 +24,8 @@ public class ImageHandler implements HttpHandler {
             // Setting the input and output directory name
             if(! fileName.equals("default"))
                 fileName = fileName.substring(0, fileName.indexOf('.'));
-            String inputDirectoryPath = "/home/skinan/project/docker_input/" + fileName + "_input/" + fileName + "/pet";
-            String outputDirectoryPath = "/home/skinan/project/docker_output/" + fileName + "_output/" + fileName;
+            String inputDirectoryPath = "/home/skinan/docker_input/" + fileName + "_input/" + fileName + "/pet";
+            String outputDirectoryPath = "/home/skinan/docker_output/" + fileName + "_output/" + fileName;
             String resultPathForResponse = outputDirectoryPath + "/predicted_data/predicted_pseudo_3d_reconstructed/" + fileName + "/" + fileName + "_3d_reconstructed_predicted.nii" ;
             Path imagePath = Paths.get(inputDirectoryPath, imageName);
             try{
@@ -47,8 +47,8 @@ public class ImageHandler implements HttpHandler {
             this.sendResponse(exchange, Paths.get(resultPathForResponse));
 
             // Removing the input and output files from the server.
-            this.deleteFolder(new File("/home/skinan/project/docker_output"));
-            this.deleteFolder(new File("/home/skinan/project/docker_input"));
+            //this.deleteFolder(new File("/home/skinan/docker_output/" + fileName + "_output"));
+            this.deleteFolder(new File("/home/skinan/docker_input/" + fileName + "_input"));
         }
         else{
             exchange.sendResponseHeaders(405, -1);
@@ -96,7 +96,7 @@ public class ImageHandler implements HttpHandler {
         }
     }
     
-    public void sendResponse(HttpExchange exchange, Path imagePath) {
+  public void sendResponse(HttpExchange exchange, Path imagePath) {
         try {
             // Read the image file into a byte array
             byte[] imageBytes = Files.readAllBytes(imagePath);
@@ -114,7 +114,7 @@ public class ImageHandler implements HttpHandler {
         }
     }
 
-    public void deleteFolder(File folder){
+public void deleteFolder(File folder){
         if(folder.isDirectory()){
             final File [] files = folder.listFiles();
             if(files != null)

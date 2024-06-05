@@ -7,8 +7,8 @@ else
     fileName="$1"
 fi
 
-input_path="/home/skinan/project/docker_input/${fileName}_input"  # Chemin vers le répertoire d'entrée sur le host
-output_path="/home/skinan/project/docker_output/${fileName}_output/$fileName"  # Chemin vers le répertoire de sortie sur le host
+input_path="/home/skinan/docker_input/${fileName}_input"  # Chemin vers le répertoire d'entrée sur le host
+output_path="/home/skinan/docker_output/${fileName}_output/$fileName"  # Chemin vers le répertoire de sortie sur le host
 
 echo "$input_path"
 echo "$output_path"
